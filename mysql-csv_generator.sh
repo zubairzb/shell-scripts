@@ -48,7 +48,7 @@ done
 
 # Generating Chatlog
 ##############################
-mysql -u "riafy_master" "-pFFEJ7Mshcb4zHH9hRp_u" -h production-rds.cdgjiicnmnry.ap-south-1.rds.amazonaws.com -e "SELECT query,answer,platform,confidence_level FROM fedneo.chat_history_log WHERE query!= 'GOOGLE_ASSISTANT_WELCOME' AND created_at BETWEEN '$DBDATE 00:00:00' AND '$DBDATE 23:59:59';" > chat_log.tsv
+mysql -u "user" "-p(password)" -h "host" -e "SELECT query,answer,platform,confidence_level FROM fedneo.chat_history_log WHERE query!= 'GOOGLE_ASSISTANT_WELCOME' AND created_at BETWEEN '$DBDATE 00:00:00' AND '$DBDATE 23:59:59';" > chat_log.tsv
 sed "s/'/\'/;s/\t/\",\"/g;s/^/\"/;s/$/\"/;s/\n//g" chat_log.tsv > chat_log-$LOGDATE.csv
 tar -czf chat_log-$LOGDATE.tar.gz chat_log-$LOGDATE.csv
 
