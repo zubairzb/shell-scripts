@@ -1,0 +1,19 @@
+#!/bin/bash
+
+#Add the services need to be monitored in the service section below
+
+services='nginx cron docker snmpd';
+
+for sr in $services;
+
+do
+
+sts=$(sudo service $sr status | grep Active | awk '{print $3}');
+
+if [ $sts != "(running)" ]; then
+
+        sudo service $sr restart;
+
+fi
+
+done
